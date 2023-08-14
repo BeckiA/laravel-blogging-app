@@ -8,8 +8,18 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    public function actuallyUpdatePost(Blog $blog, Request $request){
+    public function deletePost(Blog $blog){
+        if (auth() -> user() -> id === $blog['user_id']) {
+          $blog -> delete();
+        }
+        return redirect('/');
+    }
 
+    public function actuallyUpdatePost(Blog $blog, Request $request){
+        if (auth() -> user() -> id !== $blog['user_id']) {
+          
+            return redirect('/');
+        }
         $incomingField = $request -> validate([
             'title' => 'required',
             'body' => 'required'
