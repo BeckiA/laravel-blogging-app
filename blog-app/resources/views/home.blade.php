@@ -11,7 +11,18 @@
 <form action="/logout" method="post">
     @csrf
     <button>Logout</button>
+    <br> <br>
 </form>
+    <div style="border: 2px solid black; padding: 10px">
+        <h2>Create your first Blogpost in here</h2>
+        <form action="/create-post" method="post">
+            @csrf
+            <input type="text" placeholder="Blog Title" name="title"><br> <br>
+            <textarea name="body" placeholder="Your blog herer......"></textarea> <br> <br>
+            <button>Create Blog</button>
+        </form>
+    </div>
+
         @else
         <div style="
         border: 3px solid black; padding: 10px">
