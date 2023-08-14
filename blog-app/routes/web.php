@@ -20,13 +20,13 @@ Route::get('/', function () {
 
     if (auth() -> check()) {
         // From a user perspective
-    $blogs = auth() -> user() -> userBlogs() -> latest -> get();
-
+    $blogs = auth() -> user() -> userBlogs() -> latest() -> get();
+    return view('home', ['blogs' => $blogs]);
     }
 
     // From a blog post perspective
     // $blogs = Blog::where('user_id', auth()->id())->get();
-    return view('home', ['blogs' => $blogs]);
+    return view('home');
 });
 
 Route::post('/register', [UserController::class, 'register']);
@@ -35,3 +35,5 @@ Route::post('/login',[UserController::class, 'login']);
 
 // Blog post routes in here
 Route::post('/create-post',[PostController::class,'blogpost']);
+Route::get('edit-blog/{blog}',[PostController::class, 'showEditScreen']);
+Route::put('edit-blog/{blog}',[PostController::class, 'actuallyUpdatePost']);

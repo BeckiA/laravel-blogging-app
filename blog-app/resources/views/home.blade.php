@@ -26,7 +26,14 @@
         <h2>All Blogs</h2>
         @foreach ($blogs as $blog)
             <div style="background-color: gray; padding: 10px; margin: 10px">
-                <h3>{{$blog['title']}}</h3>
+               <h3>{{$blog['title']}}</h3>
+                    <a href="/edit-blog/{{$blog -> id}}">Edit</a> <br> <br>
+                    <form action="/delete-blog/{{$blog -> id}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form>
+                
                 <p>{{$blog['body']}}</p>
             </div>
         @endforeach
