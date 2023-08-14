@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -16,7 +17,16 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('home');
+
+    if (auth() -> check()) {
+        // From a user perspective
+    $blogs = auth() -> user() -> userBlogs() -> latest -> get();
+
+    }
+
+    // From a blog post perspective
+    // $blogs = Blog::where('user_id', auth()->id())->get();
+    return view('home', ['blogs' => $blogs]);
 });
 
 Route::post('/register', [UserController::class, 'register']);

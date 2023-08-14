@@ -22,6 +22,15 @@
             <button>Create Blog</button>
         </form>
     </div>
+    <div style="border: 3px solid black">
+        <h2>All Blogs</h2>
+        @foreach ($blogs as $blog)
+            <div style="background-color: gray; padding: 10px; margin: 10px">
+                <h3>{{$blog['title']}}</h3>
+                <p>{{$blog['body']}}</p>
+            </div>
+        @endforeach
+    </div>
 
         @else
         <div style="
